@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 04:12:15 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/21 23:15:50 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:37:41 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*find_path(char *command, char **env)
 	return (free_strs(paths), NULL);
 }
 
-int	first_child(char **argv, char **env, int *pipe_fd)
+void	first_child(char **argv, char **env, int *pipe_fd)
 {
 	int		fd;
 	char	**args;
@@ -55,10 +55,9 @@ int	first_child(char **argv, char **env, int *pipe_fd)
 		free(path);
 		exit(1);
 	}
-	return (0);
 }
 
-int	second_child(char **argv, char **env, int *pipe_fd)
+void	second_child(char **argv, char **env, int *pipe_fd)
 {
 	int		fd;
 	char	**args;
@@ -80,7 +79,6 @@ int	second_child(char **argv, char **env, int *pipe_fd)
 		free(path);
 		exit(1);
 	}
-	return (0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -97,14 +95,12 @@ int	main(int argc, char **argv, char **env)
 	if (pid1 < 0)
 		return (write(2, "fork failed\n", 13), 1);
 	if (pid1 == 0)
-		if (first_child(argv, env, pipe_fd))
-			return (write(2, "failed to open first file\n", 27), 1);
+		first_child(argv, env, pipe_fd);
 	pid2 = fork();
 	if (pid2 < 0)
 		return (write(2, "fork failed\n", 13), 1);
 	if (pid2 == 0)
-		if (second_child(argv, env, pipe_fd))
-			return (write(2, "failed to open second file\n", 28), 1);
+		second_child(argv, env, pipe_fd);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	waitpid(pid1, NULL, 0);
