@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 20:33:12 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/21 23:18:35 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/23 02:53:24 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void	handle_file_error(char *file)
 	write(2, file, ft_strlen(file));
 	write(2, ": ", 2);
 	perror("");
-	exit(1);
+	exit(128);
 }

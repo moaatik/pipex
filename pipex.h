@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 04:12:12 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/21 23:17:01 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/22 00:25:49 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <errno.h>
 
 void	free_strs(char **strs);
 char	*get_paths(char **env);

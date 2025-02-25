@@ -6,7 +6,7 @@
 /*   By: moaatik <moaatik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 04:12:15 by moaatik           #+#    #+#             */
-/*   Updated: 2025/02/21 23:37:41 by moaatik          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:56:17 by moaatik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ void	first_child(char **argv, char **env, int *pipe_fd)
 		handle_command_error(args[0], fd);
 	if (execve(path, args, env) == -1)
 	{
+		perror("pipex: execve");
 		free_strs(args);
 		free(path);
-		exit(1);
+		if (errno == ENOENT)
+			exit(127);
+		else
+			exit(126);
 	}
 }
 
@@ -75,9 +79,13 @@ void	second_child(char **argv, char **env, int *pipe_fd)
 		handle_command_error(args[0], fd);
 	if (execve(path, args, env) == -1)
 	{
+		perror("pipex: execve");
 		free_strs(args);
 		free(path);
-		exit(1);
+		if (errno == ENOENT)
+			exit(127);
+		else
+			exit(126);
 	}
 }
 
